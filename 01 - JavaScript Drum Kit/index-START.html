@@ -68,15 +68,15 @@
 
       function removeTransition(e) {
         if (e.propertyName !== "transform") return; // skip it if it's not a transform
-        this.classList.remove("playing");
+        this.classList.remove("playing"); // remove .playing class
       }
 
       const keys = document.querySelectorAll(".key");
       keys.forEach((key) =>
         key.addEventListener("transitionend", removeTransition)
-      );
+      ); // Each key gets an event listener added to it, which is transition end, when a transition is ending we will remove it with the function removeTransition
 
-      window.addEventListener("keydown", playSound);
+      window.addEventListener("keydown", playSound); // On keydown (if <audio> attached to key) playSound function
     </script>
   </body>
 </html>
