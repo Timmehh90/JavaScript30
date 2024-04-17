@@ -61,7 +61,7 @@
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); // Backticks are used for string interpolation using ${}. This selector targets <audio> element with `data-key` attribute that matches the keyCode of the key that was pressed (`e.keyCode`)
         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); // This selector targets <div> element with `data-key` attribute that matches the keyCode of the key.
         if (!audio) return; // stop the function early
-        audio.currentTime = 0; // rewind to the start
+        audio.currentTime = 0; // rewind to the start so you can spam the audio file
         audio.play(); // play the audio
         key.classList.add("playing"); // add class of playing to .key div
       }
