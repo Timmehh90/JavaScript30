@@ -57,12 +57,26 @@
     <audio data-key="76" src="sounds/tink.wav"></audio>
 
     <script>
-      window.addEventListener("keydown", function (e) {
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        if (!audio) return;
-        audio.play();
-        console.log(audio);
-      });
+      function playSound(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`); // Backticks are used for string interpolation using ${}. This selector targets <audio> element with `data-key` attribute that matches the keyCode of the key that was pressed (`e.keyCode`)
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`); // This selector targets <div> element with `data-key` attribute that matches the keyCode of the key.
+        if (!audio) return; // stop the function early
+        audio.currentTime = 0; // rewind to the start
+        audio.play(); // play the audio
+        key.classList.add("playing"); // add class of playing to .key div
+      }
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return; // skip it if it's not a transform
+        this.classList.remove("playing");
+      }
+
+      const keys = document.querySelectorAll(".key");
+      keys.forEach((key) =>
+        key.addEventListener("transitionend", removeTransition)
+      );
+
+      window.addEventListener("keydown", playSound);
     </script>
   </body>
 </html>
